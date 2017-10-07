@@ -2,11 +2,12 @@
 *.Rproj
 *.Rproj.user
 *.Rhistory
+*.RData
 *.Ruserdata
 *.history
-*.RData
 
 # Image/output files unless otherwise specified
+*.pdf
 *.png
 *.docx
 *.doc
@@ -21,9 +22,10 @@
 *.rdb
 *.knit.md
 *cache
-*.results
 
 # Other
+packrat/lib*/
+packrat/src*/
 *.httr-oauth
 *.DS_Store
 
@@ -31,9 +33,8 @@
 auth.json
 my-own-auth.json
 mturk/
-mturk-and-gmail.txt
+
 
 # Specific file keep
 !README.md
-!/original....pdf
-.Rproj.user
+!original_paper/koopmannholm2013.pdf
