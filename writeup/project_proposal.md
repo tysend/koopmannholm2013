@@ -4,6 +4,7 @@ Koopmann-Holm's study had 43 Buddhist-inspired meditators and 48 nonmeditators c
 1. an abridged Affect Valuation Index (AVI),
 1. a demographic questionnaire, and
 1. meditators also completed an assessment of their meditation practice.
+
 The main statistical test was a set of ANCOVAs that found that meditators value LAP states more and high arousal positive states (HAP) less than nonmeditators. There were no significant differences between meditators and nonmeditators in actual affect.
 
 The primary challenges might be:
