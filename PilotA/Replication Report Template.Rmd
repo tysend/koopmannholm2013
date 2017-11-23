@@ -1,0 +1,252 @@
+---
+title: "Replication of Study 1 by Koopmann-Holm et al. (2013, Emotion)"
+author: "Tysen Dauer (tysen@stanford.edu)"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+---
+
+<!-- Replication reports should all use this template to standardize reporting across projects.  These reports will be public supplementary materials that accompany the summary report(s) of the aggregate results. -->
+
+##Introduction
+
+Koopmann-Holm et al. investigated how ideal affect (how we want to feel) was affected by the practice of Buddhist-inspired meditation. Following the Affect Valuation Theory (AVT), they hypothesized that "meditators would value calm and other LAP [low arousal positive] states *more* and excitement and other HAP [high arousal positive] states *less* than would nonmeditators."
+
+Study 1 was an online correlation study with the target finding that meditators ranked how often they would ideally like to feel LAP words ("calm" and "peaceful") significantly higher than nonmeditators when completing the Affect Valuation Index (AVI). This result was the output of an ANCOVA that controlled for age and actual affect. 
+
+##Methods
+
+###Power Analysis
+
+The original effect size was reported as a partial eta squared of 0.10. Below are images from G*Power for a Post Hoc test based on the reported effect size and A Priori tests for 80%, 90%, and 95% power.
+
+![Figure 1. G*Power Post Hoc test based on Koopmann-Holm et al., 2013](PostHoc.png)
+
+![Figure 2. G*Power A Priori test for 80% power](APriori80.png)
+
+![Figure 3. G*Power A Priori test for 90% power](APriori90.png)
+
+![Figure 4. G*Power A Prior test for 95% power](APriori95.png)
+
+Even 95% power would be within budget but due to recruitment plans I will need to collect and pay for data from approximately 156 participants.
+
+###Planned Sample
+
+Those ~156 participants will be recruited on MTurk in two groups: Meditators and Nonmeditators where meditators are defined by Koopmann-Holm et al. as participants "who [have] been practicing Buddhist-inspired meditation [e.g., mindfullness, compassion meditation] for at least one year" and non meditators are defined as those who "did not practice any form of meditation."
+
+###Materials
+
+"Participants completed an abridged version of the Affect Valuation Index (AVI; Tsai & Knutson, 2006; Tsai, Knutson, & Fung, 2006), which asks participants to use a 5-point rating scale ranging from 1 (never) to 5 (all the time) to rate states that varied in terms of arousal (high, low) and valence (positive, negative) based on the affective circumplex (Feldman Barrett & Russell, 1999; Larsen & Diener, 1992; Watson & Tellegen, 1985). Participants rated how often over the course of a typical week they: (a) actually experienced each state (to assess actual affect) and (b) ideally wanted to feel each state (to assess ideal affect). 'Calm' and 'peaceful' were used to sample LAP states; 'enthusiastic' and 'euphoric' were used to sample HAP states; 'dull' and 'sleepy' to sample LAN states, and 'hostile' and 'worried' to sample HAN states... All participants also completed a demographic questionnaire, and meditators completed an assessment of their meditation practice."
+
+###Procedure	
+
+I will recruit participants through MTurk using two, related surveys. The first survey is primarily aimed at Nonmeditators (though there will be a path for collecting the necessary information from Meditators who participate in this survey). This first Qualtrics survey can be found [here](https://stanforduniversity.qualtrics.com/jfe/form/SV_0PqubcB50VKqPXf) and contains the following sections in this order:
+
+* A page for the participant to enter their MTurk ID.
+* The Affect Valuation Index (AVI) items for *actual* affect used by Koopmann-Holm et al. in the same order.
+* The Affect Valuation Index (AVI) items for *ideal* affect used by Koopmann-Holm et al. in the same order.
+* A demographic questionnaire.
+* A brief meditation eligibility section to determine if the participant meditates. If they meet the criteria to be classified as a Meditator, they move on to complete a
+* Meditation assessment (to determine how frequently participants and how long a typical meditation session lasts).
+* A block for the participant to relay any issues that arose during the survey.
+* Debrief.
+
+Each participant will receive $0.35 for completing this survey and I hope to collect data from 75 Nonmeditators and up to 10 Meditators. Based on the ratio of Meditators who participate in the first survey I will then release a second survey aimed primarily at Meditators. This second Qualtrics survey can be found [here](https://stanforduniversity.qualtrics.com/jfe/form/SV_3jWRaABC9qMp5lP) and contains the following sections in this order:
+
+* A page for the participant to enter their MTurk ID.
+* An eligibility block with distractor questions that filters out Nonmeditators.
+* The Affect Valuation Index (AVI) items for *actual* affect used by Koopmann-Holm et al. in the same order.
+* The Affect Valuation Index (AVI) items for *ideal* affect used by Koopmann-Holm et al. in the same order.
+* A meditation assessment.
+* A demographic questionnaire.
+* A block for the participant to relay any issues that arose during the survey.
+* Debrief.
+
+Each participant will receive $0.10 for completing the eligibility block and a bonus 0.25 if they are eligibile and compelte the rest of the survey. I hope to gather data from ~65 Meditators using this second survey.
+
+The original study was conducted using Remark, my replication uses Qualtrics and contains the same AVI words and ordering from Koopmann-Holm et al., 2013.
+
+###Analysis Plan
+
+"We initially ran our analyses with Gender as a between subjects factor; however, because there were no significant Gender by Group interactions, we dropped Gender from our final analyses. As mentioned above, we controlled for actual affect when examining group differences in ideal affect, and we controlled for ideal affect when examining group differences in actual affect. The findings did not change when we did not include these covariates.
+We conducted separate analyses of covariance (ANCOVAs) for actual and ideal LAP and HAP, controlling for age and the respective other type of affect."
+
+Data will be exported from Qualtrics as a csv file and imported into R. **My key analysis of interest will be the ANCOVA for determining difference in LAP ideal affect between Meditators and Nonmeditators (Study 1, Figure 1, upper left column).** 
+![Figure 1 from Study 1, Koopmann-Holm et al., 2013](Figure1.png) 
+
+![Close up on key analysis of interest: ideal LAP for Meditators and Nonmeditators](LAP.png)
+
+I will run the ANCOVA with the same covariates: age and respective other type of affect.
+
+I also plan to reproduce the remaining sections of Study 1 Figure 1: Ideal Affect for HAP and Actual Affect findings. In addition, I hope to explore correlations between demographic data (including participants' general geographic locations with in the US) and AVI responses because some of my future AVI work will compare East and West coast samples.
+
+###Differences from Original Study
+
+My sample will not be limited to college students, will not be recruited on campus, will use Qualtrics instead of Remark, and will focus primarily on replicating the Ideal LAP finding from Study 1. Age differences between a college sample and MTurk sample are the most likely place to anticipate differences in findings but I do not anticipate differences to be significant, in large part because age was controlled for in the original study. 
+
+## Pilot A Analysis 
+Here is a go with Pilot A data (5 subjects - I input this data).
+### Import the data
+```{r}
+library(forcats)
+library(tidyverse)
+library(dplyr)
+library(tidyr)
+pilotData <- read_csv(file="Test2.csv", col_names = T, col_types = NULL, na = c("", "NA"))
+pilot <- slice(pilotData, 2:6) # Removing introductory rows
+```
+
+### Prepare the data
+We need:
+calm + peaceful = LAP
+enthusiastic + euphoric = HAP
+dull + sleepy = LAN (not used)
+hostile + worried = HAN (not used)
+```{r}
+# Change the relevant columns into numeric values.
+# Ideal
+pilot$I_peaceful <- as.numeric(pilot$I_peaceful)
+pilot$I_calm <- as.numeric(pilot$I_calm)
+pilot$I_enthusiastic <- as.numeric(pilot$I_enthusiastic)
+pilot$I_euphoric <- as.numeric(pilot$I_euphoric)
+
+# Actual
+pilot$A_peaceful <- as.numeric(pilot$A_peaceful)
+pilot$A_calm <- as.numeric(pilot$A_calm)
+pilot$A_enthusiastic <- as.numeric(pilot$A_enthusiastic)
+pilot$A_euphoric <- as.numeric(pilot$A_euphoric)
+```
+
+```{r}
+# Now find the relevant means to use for plotting and ANCOVA. Group_by "Meditator"
+IdealLAP <- group_by(pilot, Meditator)
+IdealLAP <- summarize(IdealLAP, avg = mean(I_calm+I_peaceful)/2, sd = sd(I_calm+I_peaceful))
+
+IdealHAP <- group_by(pilot, Meditator)
+IdealHAP <- summarize(IdealHAP, avg = mean(I_enthusiastic+I_euphoric)/2)
+```
+
+```{r}
+# Need to adjust Age (+17 to each value) because Qualtrics listed the order of the answer options rather than the selected value.
+pilot$Age <- as.numeric(pilot$Age)
+pilot$Age <- pilot$Age + 17
+```
+
+### ANCOVA
+This section is not complete yet: I got the Ideal LAP Ratings to gather so that I could run the ANCOVA (below) but ultimately I need to add another covariate (Actual Affect - which I would call something like ActualLAPRating). But when I run more than one gather, the latest one overwrites the previous one. So for now, I only have one covariate, Age.
+```{r}
+# I think I still need to gather relevant Ideal and Actual groups in pilot so that I have a single variable to point to in my ANCOVA.
+gathered_pilot <- gather(pilot, 
+                         key = "IdealLAPword", 
+                         value = "IdealLAPRating", 
+                         I_calm,
+                         I_peaceful)
+# gathered_pilot <- gather(pilot, 
+#                          key = "IdealHAPword", 
+#                          value = "IdealHAPRating", 
+#                          I_euphoric,
+#                          I_enthusiastic)
+# gathered_pilot <- gather(pilot, 
+#                          key = "ActualLAPword", 
+#                          value = "ActualLAPRating", 
+#                          A_calm,
+#                          A_peaceful)
+# gathered_pilot <- gather(pilot, 
+#                          key = "ActualHLAPword", 
+#                          value = "ActualHAPRating", 
+#                          A_euphoric,
+#                          A_enthusiastic)
+```
+
+
+```{r}
+# Analysis of Covariance 
+fit <- aov(IdealLAPRating ~ Meditator + Age, data=gathered_pilot)
+fit
+```
+
+```{r}
+layout(matrix(c(1,2,3,4),2,2))
+plot(fit)
+```
+
+```{r}
+summary(fit)
+```
+
+### Plotting Figure 1 
+From the paper (just the key finding - upper left side).
+```{r}
+library(ggplot2)
+p <- ggplot(data=IdealLAP,
+            mapping = aes(x=Meditator, 
+                          y = avg))
+p + geom_col(aes(fill = Meditator))+
+  xlab("Meditators or Nonmeditators")+ # Would still like to remove the "1" and "2" on the x axis.
+  ylab("Average Ideal LAP Word Rating")+
+  ggtitle("Figure 1. Group Differences Emerge in Ideal LAP Affect (Study 1).")+
+  scale_fill_discrete(name = "",
+                      breaks=c("1","2"),
+                      labels = c("Meditators", "Nonmeditators"))+
+  theme_minimal()+
+  geom_errorbar(aes(ymin=avg-sd, ymax=avg+sd), # I'm not sure that I want standard deviation here.
+                width=.2,                   
+                position=position_dodge(.9))
+ 
+```
+
+<!--
+### Methods Addendum (Post Data Collection)
+
+You can comment this section out prior to final report with data collection.
+
+#### Actual Sample
+  Sample size, demographics, data exclusions based on rules spelled out in analysis plan
+
+#### Differences from pre-data collection methods plan
+  Any differences from what was described as the original plan, or “none”.
+
+
+##Results
+
+
+### Data preparation
+
+Data preparation following the analysis plan.
+	
+```{r include=F}
+###Data Preparation
+
+####Load Relevant Libraries and Functions
+
+####Import data
+
+#### Data exclusion / filtering
+
+#### Prepare data for analysis - create columns etc.
+```
+
+### Confirmatory analysis
+
+The analyses as specified in the analysis plan.  
+
+*Side-by-side graph with original graph is ideal here*
+
+###Exploratory analyses
+
+Any follow-up analyses desired (not required).  
+
+## Discussion
+
+### Summary of Replication Attempt
+
+Open the discussion section with a paragraph summarizing the primary result from the confirmatory analysis and the assessment of whether it replicated, partially replicated, or failed to replicate the original result.  
+
+### Commentary
+
+Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long.
+-->

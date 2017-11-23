@@ -1,0 +1,202 @@
+---
+title: "Replication Project Code"
+author: "Tysen Dauer"
+date: "11/19/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Script for ANCOVA
+Start with this resource for R ANCOA code: https://www.statmethods.net/stats/anova.html.
+
+And this is my working reference for understanding ANCOVA: http://proquest.safaribooksonline.com/book/statistics/9781449361129/7dot-the-pearson-correlation-coefficient/exercises_id11_html#X2ludGVybmFsX0h0bWxWaWV3P3htbGlkPTk3ODE0NDkzNjExMjklMkZhbmNvdmFfaHRtbCZxdWVyeT10JTIwdGVzdA==.
+
+Here is some fake data to test this out.
+```{r}
+fakeData <- read.csv(file="~/Desktop/fakeData.csv", header = T, sep=",")
+```
+
+Do some initial plotting of the fakeData
+```{r}
+library(ggplot2)
+p <- ggplot(data=fakeData,
+            mapping = aes(x=Meditator.or.Nonmeditator, 
+                          y = Ideal.LAP.words))
+p + geom_boxplot() #+
+#  geom_errorbar(ymin) #?
+```
+
+
+
+### ANCOVA
+Is this the idea?
+Ideal Affect response ~ Meditator / Nonmeditator + age (covariant)
+```{r}
+# Analysis of Covariance 
+fit <- aov(Ideal.LAP.words ~ Meditator.or.Nonmeditator + Age, data=fakeData)
+fit
+```
+```{r}
+layout(matrix(c(1,2,3,4),2,2))
+plot(fit)
+```
+
+```{r}
+summary(fit)
+```
+
+Checking for multiple comparisons.
+```{r}
+TukeyHSD(fit)
+```
+I want to replicate Figure 1 here.
+```{r}
+library(dplyr)
+# Need to make it a tibble first?
+fakeData2 <- as_tibble(fakeData)
+
+fakeData2$Ideal.LAP.words <- as.numeric(fakeData2$Ideal.LAP.words)
+
+avgMlap <- fakeData2%>%
+  group_by(Meditator.or.Nonmeditator)%>%
+  summarise(Mean=mean(avgMlap)) # This is returning the following error: argument is not numeric or logical: returning NAargument is not numeric or logical: returning NA. Not sure how to fix it.
+
+p <- ggplot(data=fakeData,
+            mapping = aes(x=Meditator.or.Nonmeditator,
+                          y=mean(Ideal.LAP.words)))
+p + geom_bar(aes(fill=Meditator.or.Nonmeditator,
+                 stat = "y"))
+```
+
+Am I doing ANCOVA correctly? Here is an explicity ancova command version.
+```{r}
+library(HH)
+ancova <- ancova(Ideal.LAP.words ~ Meditator.or.Nonmeditator + Age, data=fakeData)
+ancova
+```
+
+```{r}
+summary(ancova) # This looks the same so I think what I get from this is the nice looking plot, above?
+```
+
+Try controlling for multiple things at once:
+```{r}
+fit <- aov(Ideal.LAP.words ~ Meditator.or.Nonmeditator + Age + Ideal.HAP.words, data=fakeData) # I think it would actually be Actual.LAP.words not Ideal.HAP.words but still, this seems to work.
+fit
+```
+```{r}
+summary(fit)
+```
+
+## Here is a go with the fake Piot Data (5 subjects)
+### Import the data.
+```{r}
+library(forcats)
+library(tidyverse)
+library(dplyr)
+library(tidyr)
+pilotData <- read_csv(file="~/Desktop/Test2.csv", col_names = T, col_types = NULL, na = c("", "NA"))
+pilot <- slice(pilotData, 2:6) # Removing introductory rows
+```
+
+### Prepare the data.
+We need:
+calm + peaceful = LAP
+enthusiastic + euphoric = HAP
+dull + sleepy = LAN (not used)
+hostile + worried = HAN (not used)
+```{r}
+# Change the relevant columns into numeric values.
+# Ideal
+pilot$I_peaceful <- as.numeric(pilot$I_peaceful)
+pilot$I_calm <- as.numeric(pilot$I_calm)
+pilot$I_enthusiastic <- as.numeric(pilot$I_enthusiastic)
+pilot$I_euphoric <- as.numeric(pilot$I_euphoric)
+
+# Actual
+pilot$A_peaceful <- as.numeric(pilot$A_peaceful)
+pilot$A_calm <- as.numeric(pilot$A_calm)
+pilot$A_enthusiastic <- as.numeric(pilot$A_enthusiastic)
+pilot$A_euphoric <- as.numeric(pilot$A_euphoric)
+```
+
+```{r}
+# Now find the relevant means to use for plotting and ANCOVA. Group_by "Meditator"
+IdealLAP <- group_by(pilot, Meditator)
+IdealLAP <- summarize(IdealLAP, avg = mean(I_calm+I_peaceful)/2, sd = sd(I_calm+I_peaceful))
+
+IdealHAP <- group_by(pilot, Meditator)
+IdealHAP <- summarize(IdealHAP, avg = mean(I_enthusiastic+I_euphoric)/2)
+```
+
+```{r}
+# Need to adjust Age (+17 to each value) because Qualtrics listed the order of the answer options rather than the selected value.
+pilot$Age <- as.numeric(pilot$Age)
+pilot$Age <- pilot$Age + 17
+```
+
+### Now for the ANCOVA
+This section is not complete yet: I got the Ideal LAP Ratings to gather so that I could run the ANCOVA (below) but ultimately I need to add another covariate (Actual Affect - which I would call something like ActualLAPRating). But when I run more than one gather, the latest one overwrites the previous one. So for now, I only have one covariate, Age.
+```{r}
+# I think I still need to gather relevant Ideal and Actual groups in pilot so that I have a single variable to point to in my ANCOVA.
+gathered_pilot <- gather(pilot, 
+                         key = "IdealLAPword", 
+                         value = "IdealLAPRating", 
+                         I_calm,
+                         I_peaceful)
+# gathered_pilot <- gather(pilot, 
+#                          key = "IdealHAPword", 
+#                          value = "IdealHAPRating", 
+#                          I_euphoric,
+#                          I_enthusiastic)
+# gathered_pilot <- gather(pilot, 
+#                          key = "ActualLAPword", 
+#                          value = "ActualLAPRating", 
+#                          A_calm,
+#                          A_peaceful)
+# gathered_pilot <- gather(pilot, 
+#                          key = "ActualHLAPword", 
+#                          value = "ActualHAPRating", 
+#                          A_euphoric,
+#                          A_enthusiastic)
+```
+
+
+```{r}
+# Analysis of Covariance 
+fit <- aov(IdealLAPRating ~ Meditator + Age, data=gathered_pilot)
+fit
+```
+
+```{r}
+layout(matrix(c(1,2,3,4),2,2))
+plot(fit)
+```
+
+```{r}
+summary(fit)
+```
+
+### Plotting Figure 1 from the paper (just the key finding - upper left side).
+```{r}
+library(ggplot2)
+p <- ggplot(data=IdealLAP,
+            mapping = aes(x=Meditator, 
+                          y = avg))
+p + geom_col(aes(fill = Meditator))+
+  xlab("Meditators or Nonmeditators")+ # Would still like to remove the "1" and "2" on the x axis.
+  ylab("Average Ideal LAP Word Rating")+
+  ggtitle("Figure 1. Group Differences Emerge in Ideal LAP Affect (Study 1).")+
+  scale_fill_discrete(name = "",
+                      breaks=c("1","2"),
+                      labels = c("Meditators", "Nonmeditators"))+
+  theme_minimal()+
+  geom_errorbar(aes(ymin=avg-sd, ymax=avg+sd), # I'm not sure that I want standard deviation here.
+                width=.2,                   
+                position=position_dodge(.9))
+ 
+```
+
