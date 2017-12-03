@@ -77,7 +77,7 @@ I also plan to reproduce the remaining sections of Study 1 Figure 1: Ideal Affec
 
 ###Differences from Original Study
 
-My sample will not be limited to college students, will not be recruited on campus, will use Qualtrics instead of Remark, and will focus primarily on replicating the Ideal LAP finding from Study 1. Age differences between a college sample and MTurk sample are the most likely place to anticipate differences in findings but I do not anticipate differences to be significant, in large part because age was controlled for in the original study. 
+My sample will not be limited to college students, will not be recruited on campus, will use Qualtrics instead of Remark, and will focus primarily on replicating the Ideal LAP finding from Study 1. Age differences between a college sample and MTurk sample are the most likely place to anticipate differences in findings but I do not anticipate differences to be significant, in large part because age was controlled for in the original study. I am also using the same survey for both Meditators and Nonmeditators with branches as described above. The each portion of the AVI is also split into three screen-pages instead of one coninuous scrolling page for the participants' ease. 
 
 ## Pilot A Analysis 
 Here is a go with Pilot A data (5 subjects - I input this data).
