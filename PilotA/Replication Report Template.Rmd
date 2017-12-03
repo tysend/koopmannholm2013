@@ -32,11 +32,11 @@ The original effect size was reported as a partial eta squared of 0.10. Below ar
 
 ![Figure 4. G*Power A Prior test for 95% power](APriori95.png)
 
-Even 95% power would be within budget but due to recruitment plans I will need to collect and pay for data from approximately 156 participants.
+Even 95% power would be within budget but due to recruitment plans I will need to collect and pay for data from approximately 80 participants.
 
 ###Planned Sample
 
-Those ~156 participants will be recruited on MTurk in two groups: Meditators and Nonmeditators where meditators are defined by Koopmann-Holm et al. as participants "who [have] been practicing Buddhist-inspired meditation [e.g., mindfullness, compassion meditation] for at least one year" and non meditators are defined as those who "did not practice any form of meditation."
+Those ~80 participants will be recruited on MTurk in two groups: Meditators and Nonmeditators where meditators are defined by Koopmann-Holm et al. as participants "who [have] been practicing Buddhist-inspired meditation [e.g., mindfullness, compassion meditation] for at least one year" and non meditators are defined as those who "did not practice any form of meditation."
 
 ###Materials
 
@@ -44,29 +44,20 @@ Those ~156 participants will be recruited on MTurk in two groups: Meditators and
 
 ###Procedure	
 
-I will recruit participants through MTurk using two, related surveys. The first survey is primarily aimed at Nonmeditators (though there will be a path for collecting the necessary information from Meditators who participate in this survey). This first Qualtrics survey can be found [here](https://stanforduniversity.qualtrics.com/jfe/form/SV_0PqubcB50VKqPXf) and contains the following sections in this order:
+I will recruit participants to take a survey through MTurk. The survey collects AVI data from Meditators and Nonmeditators and captures additional relevant information for each group (demographics and/or meditation assessment). The structure of the survey is as follows:
 
+* An IRB consent paragraph and question. Participants may choose to leave the survey and this point (and report any issues that came up).
 * A page for the participant to enter their MTurk ID.
-* The Affect Valuation Index (AVI) items for *actual* affect used by Koopmann-Holm et al. in the same order.
-* The Affect Valuation Index (AVI) items for *ideal* affect used by Koopmann-Holm et al. in the same order.
+* An eligibility block with distractor questions that gives Meditators an additional assessment at the end of the survey. Participants who report meditating but with less than 1 year of experience do not meet the criteria for being either Meditators or Nonmeditators are done with the survey at this point and have the opportunity to report any issues they encountered. 
+* Participants who meet the criteria to be Meditators or Nonmeditators are then told that they have been randomly selected to continue with the survey for an additional bonus payment of 0.25 if they so choose. Participants who do not complete the AVI receive 0.10.
+* The Affect Valuation Index (AVI) items for *actual* affect used by Koopmann-Holm et al. in the same order but broken up into 3 screen-pages.
+* The Affect Valuation Index (AVI) items for *ideal* affect used by Koopmann-Holm et al. in the same order but broken up into 3 screen-pages.
 * A demographic questionnaire.
-* A brief meditation eligibility section to determine if the participant meditates. If they meet the criteria to be classified as a Meditator, they move on to complete a
 * Meditation assessment (to determine how frequently participants and how long a typical meditation session lasts).
 * A block for the participant to relay any issues that arose during the survey.
-* Debrief.
+* Debriefing.
 
-Each participant will receive $0.35 for completing this survey and I hope to collect data from 75 Nonmeditators and up to 10 Meditators. Based on the ratio of Meditators who participate in the first survey I will then release a second survey aimed primarily at Meditators. This second Qualtrics survey can be found [here](https://stanforduniversity.qualtrics.com/jfe/form/SV_3jWRaABC9qMp5lP) and contains the following sections in this order:
-
-* A page for the participant to enter their MTurk ID.
-* An eligibility block with distractor questions that filters out Nonmeditators.
-* The Affect Valuation Index (AVI) items for *actual* affect used by Koopmann-Holm et al. in the same order.
-* The Affect Valuation Index (AVI) items for *ideal* affect used by Koopmann-Holm et al. in the same order.
-* A meditation assessment.
-* A demographic questionnaire.
-* A block for the participant to relay any issues that arose during the survey.
-* Debrief.
-
-Each participant will receive $0.10 for completing the eligibility block and a bonus 0.25 if they are eligibile and compelte the rest of the survey. I hope to gather data from ~65 Meditators using this second survey.
+Each participant will receive $0.35 for completing this entire survey and I hope to collect data from 40 Nonmeditators and up to 40 Meditators. The survey can be viewed [here](https://stanforduniversity.qualtrics.com/jfe/form/SV_3jWRaABC9qMp5lP).
 
 The original study was conducted using Remark, my replication uses Qualtrics and contains the same AVI words and ordering from Koopmann-Holm et al., 2013.
 
