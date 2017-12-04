@@ -81,6 +81,125 @@ I also plan to reproduce the remaining sections of Study 1 Figure 1: Ideal Affec
 
 My sample will not be limited to college students, will not be recruited on campus, will use Qualtrics instead of Remark, and will focus primarily on replicating the Ideal LAP finding from Study 1. Age differences between a college sample and MTurk sample are the most likely place to anticipate differences in findings but I do not anticipate differences to be significant, in large part because age was controlled for in the original study. I am also using the same survey for both Meditators and Nonmeditators with branches as described above. The each portion of the AVI is also split into three screen-pages instead of one coninuous scrolling page for the participants' ease. 
 
+## Pilot B Analysis 
+This analysis uses the data from 4 MTurk participants (2 Meditators and 2 Nonmeditators).
+### Import the data
+Uploading a version of the data that does *not* have MTurk IDs (removed those values from the csv file). NB: I removed the second row of the downloaded csv file which contained the exact text of each question.
+```{r}
+library(forcats)
+library(tidyverse)
+library(dplyr)
+library(tidyr)
+pilotBData <- read_csv(file="PilotBData_noIDs.csv", col_names = T, col_types = NULL, na = c("", "NA")) 
+```
+
+### Prepare the data
+We need:
+calm + peaceful = LAP
+enthusiastic + euphoric = HAP
+dull + sleepy = LAN (not used)
+hostile + worried = HAN (not used)
+
+Combine "nonmeditator" and "meditator" columns into one column.
+```{r}
+pilotBData <- pilotBData %>%
+  unite(Meditator, nonmeditator, meditator)
+```
+
+Use rowMeans to calculate composite factors
+```{r}
+# https://web.stanford.edu/class/psych253/tutorials/FactorAnalysis.html
+# composite factors
+IdealLAP <- rowMeans(cbind(pilotBData$I_calm, pilotBData$I_peaceful))
+IdealHAP <- rowMeans(cbind(pilotBData$I_enthusiastic, pilotBData$I_euphoric))
+ActualLAP <- rowMeans(cbind(pilotBData$A_calm, pilotBData$A_peaceful))
+ActualHAP <- rowMeans(cbind(pilotBData$A_enthusiastic, pilotBData$A_euphoric))
+# combine into dataframe
+combined_data <- cbind(IdealLAP, IdealHAP, ActualLAP, ActualHAP)
+combined_data <- as.data.frame(combined_data)
+# join with relevent parts of pilotBData
+B <- cbind(pilotBData$Meditator, pilotBData$Age)
+B <- as.data.frame(B)
+joined <-  cbind(B, combined_data)
+joined <- as.data.frame(joined)
+# Change column names for V1 and V2 to Meditator and Age.
+colnames(joined)[1] <- "Meditator"
+colnames(joined)[2] <- "Age"
+```
+
+CIs
+```{r}
+sem <- function(x) {sd(x, na.rm=TRUE) / sqrt(sum(!is.na((x))))}
+ci <- function(x) {sem(x) * 1.96}
+```
+
+```{r}
+# First, clean up "joined": remove participants with "NA_NA" under "Meditator". These are participants who do not qualify as either Meditators or Nonmeditators.
+joined <- joined %>%
+  filter(Meditator != "NA_NA")
+# Now remove "No_NA." This is a participant who qualified as a Nonmeditator but chose not to do the AVI (i.e. chose not to take the Bonus).
+joined <- na.omit(joined)
+# Change "Age" from factor to numeric
+joined$Age <- as.numeric(levels(joined$Age))
+```
+
+```{r}
+# Change names of factor levels for Meditator from "NA_1 year or more" and "No_NA" to "Meditators" and "Nonmeditators". There will also be a blank for the NA_NA group that are not included in the final plot.
+levels(joined$Meditator) <- c("Meditators", "", "Nonmeditators")
+```
+
+
+```{r}
+toPlot <- joined %>%
+  group_by(Meditator) %>%
+  summarise(MeanAge = mean(Age),
+            MeanActualLAP = mean(ActualLAP),
+            MeanIdealLAP = mean(IdealLAP),
+            "ci" = ci(IdealLAP),
+            cilow = MeanIdealLAP - ci,
+            cihi = MeanIdealLAP + ci)
+```
+
+
+### ANCOVA
+```{r}
+# Analysis of Covariance 
+fit <- aov(MeanIdealLAP ~ Meditator + MeanAge + MeanActualLAP, data=toPlot)
+fit
+```
+
+This is removed for now as there is not enough data to compute.
+```{r}
+# layout(matrix(c(1,2,3,4),2,2))
+# plot(fit)
+```
+
+```{r}
+summary(fit)
+```
+
+### Plotting Figure 1 
+From the paper (just the key finding - upper left side).
+```{r}
+library(ggplot2)
+p <- ggplot(data=toPlot,
+            mapping = aes(x=Meditator, 
+                          y = MeanIdealLAP))
+p + geom_col(aes(fill = Meditator))+
+  xlab("Meditators or Nonmeditators")+ 
+  ylab("Average Ideal LAP Word Rating")+
+  ggtitle("Figure 1. Group Differences Emerge in Ideal LAP Affect (Study 1).")+
+  scale_fill_discrete(name = "",
+                      breaks=c("1","2"),
+                      labels = c("Meditators", "Nonmeditators"))+
+  theme_minimal()+
+  geom_errorbar(data = toPlot,
+                mapping = aes(x=Meditator, ymin=cilow, ymax=cihi), 
+                width=.2,                   
+                position=position_dodge(.9))
+ 
+```
+<!--
 ## Pilot A Analysis 
 Here is a go with Pilot A data (5 subjects - I input this data).
 ### Import the data
