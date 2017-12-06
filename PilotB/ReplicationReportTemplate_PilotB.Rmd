@@ -50,13 +50,13 @@ The original effect size was reported as a partial eta squared of 0.10. Below ar
 
 ![Figure 4. G*Power A Prior test for 95% power](APriori95.png)
 
-My target sample size will be just above 80% power (80 usable participant data sets after recruiting 100 total participants). 
+My target sample size will be just above 80% power (80 usable participant data sets). We will recruit a sufficient number of participants to achieve our planned sample size of 80. 
 
 ###Planned Sample
 
 Those 80 participants will be grouped within the survey as Meditators and Nonmeditators where meditators are defined by Koopmann-Holm et al. as participants "who [have] been practicing Buddhist-inspired meditation [e.g., mindfullness, compassion meditation] for at least one year" and non meditators are defined as those who "did not practice any form of meditation."
 
-Participants will be recruited through MTurk. The aim is to get AVI data from 40 Nonmeditators and 40 Meditators. I expect that collecting data from 40 Meditators will take longer than collecting Nonmeditator data so the Qualtrics survey contains quotas to cap the number of Nonmeditators allowed to take the AVI portion of the survey at 40. This means that once 40 Nonmeditators have taken the survey there will be additional Nonmeditators who take the non-AVI portion of the survey (and receive a 0.10) as I wait for more eligible Meditators to take the AVI. As a result, I will initially create 100, rather than just 80 HITs on MTurk. See "Procedure" for more details about the survey design. 
+Participants will be recruited through MTurk. The aim is to get AVI data from 40 Nonmeditators and 40 Meditators. I expect that collecting data from 40 Meditators will take longer than collecting Nonmeditator data so the Qualtrics survey contains quotas to cap the number of Nonmeditators allowed to take the AVI portion of the survey at 40. This means that once 40 Nonmeditators have taken the survey there will be additional Nonmeditators who take the non-AVI portion of the survey (and receive a 0.10) as I wait for more eligible Meditators to take the AVI. As a result, I will initially create more than 80 HITs on MTurk. See "Procedure" for more details about the survey design. 
 
 ###Materials
 
@@ -77,7 +77,7 @@ I will recruit participants to take a survey through MTurk. The survey collects 
 * A block for the participant to relay any issues that arose during the survey.
 * Debriefing.
 
-Each participant will receive $0.35 for completing this entire survey and I hope to collect data from 40 Nonmeditators and up to 40 Meditators. The survey can be viewed [here](https://stanforduniversity.qualtrics.com/jfe/form/SV_3jWRaABC9qMp5lP).
+Each participant will receive $0.35 for completing this entire survey and I plan to collect data from a sufficient number of participants to achieve 40 Nonmeditator and 40 Meditator data sets. The survey can be viewed [here](https://stanforduniversity.qualtrics.com/jfe/form/SV_3jWRaABC9qMp5lP). Participants who engage in straight-lining (in this case giving the identical response to an entire page worth of survey questions) will be excluded from analysis.  
 
 The original study was conducted using Remark, my replication uses Qualtrics and contains the same AVI words and ordering from Koopmann-Holm et al., 2013.
 
@@ -89,37 +89,38 @@ The original study was conducted using Remark, my replication uses Qualtrics and
 
 > The main effect of Group, however, was not significant for actual LAP [F(1, 87) = 1.44, ns] or actual HAP [F(1, 87) = 1.23, ns]; meditators and nonmeditators did not differ in how calm or excited they actually felt. The main effect of Group was also not significant for ideal LAN [Meditators: M = 1.09, SE = .04; Nonmeditators: M = 1.11, SE= .03; F(1, 87) = .28, ns], ideal HAN [Meditators: M = 1.08, SE = .04; Nonmeditators: M = 1.10, SE = .03; F(1, 87) = .17, ns], actual LAN [Meditators: M = 1.98, SE = .11; Nonmeditators: M = 1.99, SE = .10; F(1, 87) = .00, ns], or actual HAN [Meditators: M = 1.84, SE = .11; Nonmeditators: M = 1.79, SE = .10; F(1, 87) = .13, ns].
 
-Data will be exported from Qualtrics as a csv file and imported into R. **My key analysis of interest will be the ANCOVA for determining difference in LAP ideal affect between Meditators and Nonmeditators controlling for age and LAP actual affect (Study 1, Figure 1, upper left column).** This replication will be considered a success if the above ANCOVA reveals a significant difference between Meditators and Nonmeditators ideal LAP ratings.  
+Data will be exported from Qualtrics as a csv file and imported into R. **My key analysis of interest will be the ANCOVA for determining difference in LAP ideal affect between Meditators and Nonmeditators controlling for age and LAP actual affect (Study 1, Figure 1, upper left column).** This replication will be considered a success if the above ANCOVA reveals that Meditators have higher ideal LAP ratings than Nonmeditators.  
 ![Figure 1 from Study 1, Koopmann-Holm et al., 2013](Figure1.png) 
 
 ![Close up on key analysis of interest: ideal LAP for Meditators and Nonmeditators](LAP.png)
 
 I will run the ANCOVA with the same covariates: age and respective other type of affect.
 
-I also plan to reproduce the remaining sections of Study 1 Figure 1: Ideal Affect for HAP and Actual Affect findings. In addition, I hope to explore correlations between demographic data (including participants' general geographic locations with in the US) and AVI responses because some of my future AVI work will compare East and West coast samples.
+I also plan to reproduce the remaining sections of Study 1 Figure 1: Ideal Affect for HAP and Actual Affect findings. In addition, I plan to explore correlations between demographic data (including participants' general geographic locations with in the US) and AVI responses because some of my future AVI work will compare East and West coast samples.
 
 ###Differences from Original Study
 
-My sample will not be limited to college students, will not be recruited on campus, will use Qualtrics instead of Remark, and will focus primarily on replicating the Ideal LAP finding from Study 1. Age differences between a college sample and MTurk sample are the most likely place to anticipate differences in findings but I do not anticipate differences to be significant, in large part because age was controlled for in the original study. I am also using the same survey for both Meditators and Nonmeditators with branches as described above. The each portion of the AVI is also split into three screen-pages instead of one coninuous scrolling page for the participants' ease. 
+My sample will not be limited to college students, will not be recruited on campus, will not seperately recruit Meditators and Nonmeditators (rather they will be identified and branched in the Qualtrics survey), will use Qualtrics instead of Remark, and will focus primarily on replicating the Ideal LAP finding from Study 1. Age differences between a college sample and MTurk sample are the most likely place to anticipate differences in findings. <!--I am also using the same survey for both Meditators and Nonmeditators with branches as described above. The each portion of the AVI is also split into three screen-pages instead of one coninuous scrolling page for the participants' ease. -->
 
 ## Pilot B Analysis 
 This analysis uses the data from 4 MTurk participants (2 Meditators and 2 Nonmeditators).
+
 ### Import the data
 Uploading a version of the data that does *not* have MTurk IDs (removed those values from the csv file). NB: I removed the second row of the downloaded csv file which contained the exact text of each question.
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(forcats)
 library(tidyverse)
 library(dplyr)
 library(tidyr)
+library(ez)
+```
+
+```{r, message=FALSE, warning=FALSE}
 pilotBData <- read_csv(file="PilotB.csv", col_names = T, col_types = NULL, na = c("", "NA")) 
 ```
 
 ### Prepare the data
-We need:
-calm + peaceful = LAP
-enthusiastic + euphoric = HAP
-dull + sleepy = LAN (not used)
-hostile + worried = HAN (not used)
+Following Koopmann-Holm et al.'s analysis, I combine AVI responses for "calm" and "peaceful" together to measure LAP and AVI responses for "enthusiastic" and "euphoric" together to measure HAP. 
 
 Combine "nonmeditator" and "meditator" columns into one column.
 ```{r}
@@ -148,7 +149,7 @@ colnames(joined)[1] <- "Meditator"
 colnames(joined)[2] <- "Age"
 ```
 
-CIs
+### Create Confidence Intervals
 ```{r}
 sem <- function(x) {sd(x, na.rm=TRUE) / sqrt(sum(!is.na((x))))}
 ci <- function(x) {sem(x) * 1.96}
@@ -162,6 +163,11 @@ joined <- joined %>%
 joined <- joined[complete.cases(joined$Age),]
 # Change "Age" from factor to numeric
 joined$Age <- as.numeric(as.character(joined$Age))
+# Remove unused level from factor "Meditator"
+joined <- droplevels(joined)
+# Add rownames to use as n for ez
+joined <- joined %>%
+  mutate(n=as.integer(rownames(joined)))
 ```
 
 ```{r}
@@ -169,7 +175,7 @@ joined$Age <- as.numeric(as.character(joined$Age))
 levels(joined$Meditator) <- c("Meditators", "", "Nonmeditators")
 ```
 
-
+### Prepare data for plotting
 ```{r}
 toPlot <- joined %>%
   group_by(Meditator) %>%
@@ -178,10 +184,11 @@ toPlot <- joined %>%
             MeanIdealLAP = mean(IdealLAP),
             "ci" = ci(IdealLAP),
             cilow = MeanIdealLAP - ci,
-            cihi = MeanIdealLAP + ci)
+            cihi = MeanIdealLAP + ci,
+            n=n())
 ```
 
-```{r results = 'asis', echo=F}
+```{r results = 'asis', message=FALSE}
 knitr::kable(toPlot, caption = "Summary Data") 
 ```
 
@@ -190,7 +197,6 @@ knitr::kable(toPlot, caption = "Summary Data")
 fit2 <- aov(IdealLAP ~ Meditator + Age + ActualLAP, data=joined)
 fit2
 ```
-
 
 ```{r}
 layout(matrix(c(1,2,3,4),2,2))
@@ -201,12 +207,12 @@ plot(fit2)
 fit2_summary <- summary(fit2)
 ```
 
-```{r results = "asis", echo = FALSE}
+```{r results = "asis", message = FALSE}
 print(xtable::xtable(fit2_summary, caption = "ANCOVA Summary"),
 type = "html", html.table.attributes = "border=0")
 ```
 
-### Plotting Figure 1 
+### Plot the data 
 From the paper (just the key finding - upper left side).
 ```{r}
 library(ggplot2)
@@ -225,6 +231,29 @@ p + geom_col(aes(fill = Meditator))+
  
 ```
 
+### Calculate partial eta squared
+```{r}
+# https://www.rdocumentation.org/packages/ez/versions/4.4-0/topics/ezANOVA
+# https://cslabsfu.wordpress.com/2011/07/15/update-using-the-ez-package-in-r-for-anova/
+aov <- ezANOVA(data = joined, dv = IdealLAP, wid = n,
+               between = .(Meditator), between_covariates = .(Age, ActualLAP), detailed = TRUE)
+
+unlisted <- unlist(aov)
+
+aov_stats <- tibble(
+  effect = ("Meditator"),
+  F = (as.double(unlisted["ANOVA.F"])), 
+  p = (as.double(unlisted["ANOVA.p"])),
+  SSn = (as.double(unlisted["ANOVA.SSn"])),
+  SSd = (as.double(unlisted["ANOVA.SSd"]))
+) %>% 
+  mutate(partial_eta_squared = SSn / (SSn + SSd)) %>% 
+  select(-SSn, -SSd)
+```
+
+```{r results = 'asis', message=F}
+knitr::kable(aov_stats, caption = "ANCOVA Statistics") 
+```
 
 <!--
 ### Methods Addendum (Post Data Collection)
