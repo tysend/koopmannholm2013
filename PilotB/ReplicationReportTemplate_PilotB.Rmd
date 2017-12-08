@@ -102,8 +102,8 @@ I also plan to reproduce the remaining sections of Study 1 Figure 1: Ideal Affec
 
 My sample will not be limited to college students, will not be recruited on campus, will not seperately recruit Meditators and Nonmeditators (rather they will be identified and branched in the Qualtrics survey), will use Qualtrics instead of Remark, and will focus primarily on replicating the Ideal LAP finding from Study 1. Age differences between a college sample and MTurk sample are the most likely place to anticipate differences in findings. <!--I am also using the same survey for both Meditators and Nonmeditators with branches as described above. The each portion of the AVI is also split into three screen-pages instead of one coninuous scrolling page for the participants' ease. -->
 
-## Pilot B Analysis 
-This analysis uses the data from 4 MTurk participants (2 Meditators and 2 Nonmeditators).
+## Replication Analysis 
+This analysis uses the data from 4 MTurk participants (2 Meditators and 2 Nonmeditators) and self-generated data from Pilot A. The final analysis will use only the MTurk data described above.
 
 ### Import the data
 Uploading a version of the data that does *not* have MTurk IDs (removed those values from the csv file). NB: I removed the second row of the downloaded csv file which contained the exact text of each question.
@@ -113,6 +113,9 @@ library(tidyverse)
 library(dplyr)
 library(tidyr)
 library(ez)
+library(ggplot2)
+library(sjstats)
+library(heplots)
 ```
 
 ```{r, message=FALSE, warning=FALSE}
@@ -172,7 +175,7 @@ joined <- joined %>%
 
 ```{r}
 # Change names of factor levels for Meditator from "NA_1 year or more" and "No_NA" to "Meditators" and "Nonmeditators". There will also be a blank for the NA_NA group that are not included in the final plot.
-levels(joined$Meditator) <- c("Meditators", "", "Nonmeditators")
+levels(joined$Meditator) <- c("Meditators", "Nonmeditators")
 ```
 
 ### Prepare data for plotting
@@ -198,6 +201,7 @@ fit2 <- aov(IdealLAP ~ Meditator + Age + ActualLAP, data=joined)
 fit2
 ```
 
+
 ```{r}
 layout(matrix(c(1,2,3,4),2,2))
 plot(fit2)
@@ -215,7 +219,6 @@ type = "html", html.table.attributes = "border=0")
 ### Plot the data 
 From the paper (just the key finding - upper left side).
 ```{r}
-library(ggplot2)
 p <- ggplot(data=toPlot,
             mapping = aes(x=Meditator, 
                           y = MeanIdealLAP))
@@ -233,26 +236,11 @@ p + geom_col(aes(fill = Meditator))+
 
 ### Calculate partial eta squared
 ```{r}
-# https://www.rdocumentation.org/packages/ez/versions/4.4-0/topics/ezANOVA
-# https://cslabsfu.wordpress.com/2011/07/15/update-using-the-ez-package-in-r-for-anova/
-aov <- ezANOVA(data = joined, dv = IdealLAP, wid = n,
-               between = .(Meditator), between_covariates = .(Age, ActualLAP), detailed = TRUE)
-
-unlisted <- unlist(aov)
-
-aov_stats <- tibble(
-  effect = ("Meditator"),
-  F = (as.double(unlisted["ANOVA.F"])), 
-  p = (as.double(unlisted["ANOVA.p"])),
-  SSn = (as.double(unlisted["ANOVA.SSn"])),
-  SSd = (as.double(unlisted["ANOVA.SSd"]))
-) %>% 
-  mutate(partial_eta_squared = SSn / (SSn + SSd)) %>% 
-  select(-SSn, -SSd)
+# Sanity check on ANCOVA results by using another method (eta_sq from "sjstats")
+My_eta <- eta_sq(fit2, partial=TRUE) # This equals the SS(factor=Meditator)/(SS(factor=Meditator)+SS(residual))
 ```
-
-```{r results = 'asis', message=F}
-knitr::kable(aov_stats, caption = "ANCOVA Statistics") 
+```{r results = 'asis', message=FALSE}
+knitr::kable(My_eta, caption = "Partial eta squared values") 
 ```
 
 <!--
