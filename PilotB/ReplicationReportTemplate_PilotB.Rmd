@@ -16,7 +16,7 @@ output:
 
 Koopmann-Holm et al. investigated how ideal affect (how we want to feel) was affected by the practice of Buddhist-inspired meditation. Following the Affect Valuation Theory (AVT), they hypothesized that "meditators would value calm and other LAP [low arousal positive] states *more* and excitement and other HAP [high arousal positive] states *less* than would nonmeditators."
 
-Study 1 was an online correlation study with the target finding that meditators ranked how often they would ideally like to feel LAP words ("calm" and "peaceful") significantly higher than nonmeditators when completing the Affect Valuation Index (AVI). This result was the output of an ANCOVA that controlled for age and actual affect. 
+Study 1 was an online correlation study with the target finding that meditators ranked how often they would ideally like to feel LAP words ("calm" and "peaceful") significantly higher than nonmeditators when completing the Affect Valuation Index (AVI). This result was the output of an ANCOVA that controlled for age and actual affect. Causal impacts of meditation on ideal LAP were investigated in Koopmann-Holm et al.'s Studies 2 and 3.
 
 ##Methods
 
@@ -243,6 +243,12 @@ My_eta <- eta_sq(fit2, partial=TRUE) # This equals the SS(factor=Meditator)/(SS(
 knitr::kable(My_eta, caption = "Partial eta squared values") 
 ```
 
+###Exploratory analyses
+I also plan to pursue the following analysis paths:
+* Investigate Ideal LAP differences by US region (primarily West Coast versus East Coast).
+* Look at ideal affects by ethnic identification based on previous literature. 
+* See if there are correlations between frequency and duration of meditation sessions and Ideal LAP.
+
 <!--
 ### Methods Addendum (Post Data Collection)
 
@@ -282,7 +288,7 @@ The analyses as specified in the analysis plan.
 
 ###Exploratory analyses
 
-Any follow-up analyses desired (not required).  
+Any follow-up analyses desired (not required).
 
 ## Discussion
 
