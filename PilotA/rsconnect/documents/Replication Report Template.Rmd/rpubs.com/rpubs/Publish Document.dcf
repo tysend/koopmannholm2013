@@ -1,0 +1,10 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/333191/7a91627cc2324cab863b33c1bc431d6f
+bundleId: https://api.rpubs.com/api/v1/document/333191/7a91627cc2324cab863b33c1bc431d6f
+url: http://rpubs.com/tdd_psych251/333191
+when: 1512268688.67806
